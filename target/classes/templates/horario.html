@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <th:block th:insert="~{fragments :: head-comun}"></th:block>
+    <title th:text="'Horario de hoy - ' + ${#temporals.format(fecha, 'dd/MM/yyyy')} ?: 'Horario'">Horario</title>
+    <style>
+        /* Estilos críticos para evitar destello antes de cargar CSS */
+        :root {
+            --fondo: #EAF6FF;
+            --boton: #3E8FD6;
+            --texto: #1E5A9C;
+        }
+    </style>
+</head>
+<body>
+    <th:block th:insert="~{fragments :: cabecera('Mis actividades de hoy', '/', false)}"></th:block>
+
+    <main class="contenido-secuencia">
+        <section class="tarjeta-secuencia">
+            <h1 class="titulo-secuencia" th:text="'Mis actividades de hoy'">Mis actividades</h1>
+
+            <div th:if="${secuencia == null or secuencia.actividades == null or secuencia.actividades.isEmpty()}"
+                 class="estado-vacio">
+                <p class="mensaje-vacio">No hay actividades programadas aún.</p>
+                <a th:href="@{/docente/horario}" class="boton-principal">Ir al panel docente</a>
+            </div>
+
+            <div th:if="${secuencia != null and secuencia.actividades != null and !secuencia.actividades.isEmpty()}"
+                 class="lista-secuencia">
+                <div th:each="actividad, iter : ${secuencia.actividades}"
+                     class="item-secuencia"
+                     th:id="'actividad-' + ${actividad.id}">
+                    <div class="numero-paso" th:text="${iter.count}">1</div>
+
+                    <div class="contenido-paso">
+                        <img th:src="${actividad.urlImagen}"
+                             th:alt="${actividad.nombre}"
+                             class="pictograma-paso"
+                             width="120" height="120"
+                             loading="lazy"/>
+                        <div class="texto-paso" th:text="${actividad.nombre}">Nombre actividad</div>
+                        <div class="detalle-paso" th:if="${actividad.duracionEstimadaMin != null}"
+                             th:text="'~ ' + ${actividad.duracionEstimadaMin} + ' min'">~ 30 min</div>
+                    </div>
+
+                    <a th:href="@{/actividad/{id}(id=${actividad.id})}"
+                       class="boton-siguiente"
+                       th:text="'Siguiente'">Siguiente</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="zona-accion">
+            <button class="boton-cambio" id="btn-aviso-cambio">
+                <span aria-hidden="true">⚠️</span> <span th:text="'Aviso de cambio de rutina'">Aviso de cambio</span>
+            </button>
+        </section>
+    </main>
+
+    <th:block th:insert="~{fragments :: pie}"></th:block>
+
+</body>
+</html>

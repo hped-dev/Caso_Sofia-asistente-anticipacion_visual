@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
+    <th:block th:insert="~{fragments :: head-comun}"></th:block>
+    <title th:text="'Vista previa para Sofía'">Vista previa para Sofía</title>
+</head>
+
+<body>
+    <th:block th:insert="~{fragments :: cabecera('Vista previa para Sofía', '/docente/horario/' + ${#temporals.format(fecha, 'yyyy-MM-dd')}, true)}"></th:block>
+
+    <main class="contenido-docente">
+        <section class="panel-previa">
+            <h1 class="titulo-panel" th:text="'Vista previa para Sofía - ' + ${#temporals.format(fecha, 'dd/MM/yyyy')}">
+                Vista previa</h1>
+
+            <p class="descripcion-previa">Así verá Sofía la secuencia de hoy:</p>
+
+            <div th:if="${actividades != null and !actividades.isEmpty()}" class="secuencia-previa">
+                <div th:each="act : ${actividades}" class="item-previa">
+                    <div class="numero-previa" th:text="${act.orden}">1</div>
+                    <img th:src="@{/img/pictogramas/__${act.pictogramaClave}__.png}"
+                        th:alt="${act.nombre}" class="pictograma-previa" width="80" height="80" />
+                    <div class="nombre-previa" th:text="${act.nombre}">Actividad</div>
+                    <div class="detalle-previa"
+                        th:text="'~ ' + ${act.duracionEstimadaMin} + ' min | aviso ' + ${act.avisoCambioMin} + ' min'">~
+                        30 min</div>
+                </div>
+            </div>
+
+            <div th:if="${actividades == null or actividades.isEmpty()}" class="estado-vacio-docente">
+                <p>No hay actividades para mostrar en la previa.</p>
+            </div>
+
+            <a th:href="@{/docente/horario/{fecha}(fecha=${fecha})}" class="boton-volver-docente">Volver al horario</a>
+        </section>
+    </main>
+
+    <th:block th:insert="~{fragments :: pie}"></th:block>
+</body>
+
+</html>

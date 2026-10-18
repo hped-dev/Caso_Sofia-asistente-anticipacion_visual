@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <th:block th:insert="~{fragments :: head-comun}"></th:block>
+    <title th:text="'Panel docente - Horario'">Panel docente - Horario</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments :: cabecera('Panel docente', '/', true)}"></th:block>
+
+    <main class="contenido-docente">
+        <section class="panel-horario">
+            <h1 class="titulo-panel" th:text="'Horario del ' + ${#temporals.format(fecha, 'dd/MM/yyyy')}">Horario</h1>
+
+            <div th:if="${jornada != null and actividades != null and !actividades.isEmpty()}"
+                 class="lista-actividades-docente">
+                <table class="tabla-horario">
+                    <thead>
+                    <tr>
+                        <th th:text="'Orden'">Orden</th>
+                        <th th:text="'Actividad'">Actividad</th>
+                        <th th:text="'Pictograma'">Pictograma</th>
+                        <th th:text="'Duración (min)'">Duración</th>
+                        <th th:text="'Aviso cambio (min)'">Aviso</th>
+                        <th th:text="'Acciones'">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="act : ${actividades}">
+                        <td th:text="${act.orden}">1</td>
+                        <td th:text="${act.nombre}">Actividad</td>
+                        <td>
+                            <img th:src="@{/img/pictogramas/__${act.pictogramaClave}__.png}"
+                                 th:alt="${act.nombre}" class="pictograma-tabla" width="40" height="40"/>
+                        </td>
+                        <td th:text="${act.duracionEstimadaMin}">30</td>
+                        <td th:text="${act.avisoCambioMin}">5</td>
+                        <td class="acciones-tabla">
+                            <a th:href="@{/docente/actividad-form(actividadId=${act.id})}"
+                               class="boton-editar-docente">Editar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${jornada == null or actividades == null or actividades.isEmpty()}"
+                 class="estado-vacio-docente">
+                <p>No hay actividades cargadas para esta fecha.</p>
+            </div>
+
+            <div class="zona-accion-docente">
+                <a th:href="@{/docente/actividad-form(jornadaId=${jornada != null ? jornada.id : null})}"
+                   class="boton-principal-docente">
+                    <span aria-hidden="true">➕</span> <span>Agregar actividad</span>
+                </a>
+            </div>
+
+            <a th:href="@{/docente/previa/{fecha}(fecha=${fecha})}" class="enlace-previa">
+                <span aria-hidden="true">👁️</span> <span>Vista previa para Sofía</span>
+            </a>
+
+            <a th:href="@{/horario/{fecha}(fecha=${fecha})}" class="boton-ver-sofia">
+                <span aria-hidden="true">👧</span> <span>Ver lo que ve Sofía</span>
+            </a>
+        </section>
+    </main>
+
+    <th:block th:insert="~{fragments :: pie}"></th:block>
+</body>
+</html>

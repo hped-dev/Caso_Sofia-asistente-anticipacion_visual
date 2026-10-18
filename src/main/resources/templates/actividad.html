@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <th:block th:insert="~{fragments :: head-comun}"></th:block>
+    <title th:text="'Actividad actual - Sofía'">Actividad actual</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments :: cabecera('Actividad actual', '/', false)}"></th:block>
+
+    <main class="contenido-actividad">
+        <section class="tarjeta-actividad-central">
+            <h1 class="titulo-actividad" th:text="'Actividad actual'">Actividad actual</h1>
+
+            <div class="contenedor-pictograma-grande">
+                <img th:src="${urlImagen}"
+                     th:alt="${nombreActividad ?: 'actividad'}"
+                     class="pictograma-grande"
+                     width="200" height="200"
+                     th:if="${urlImagen != null}"/>
+                <div th:if="${urlImagen == null}" class="pictograma-placeholder">🐬</div>
+            </div>
+
+            <h2 class="nombre-actividad-grande" th:text="${nombreActividad ?: 'Actividad'}">Nombre</h2>
+
+            <div class="temporizador-visual" id="temporizador">
+                <span class="etiqueta-temporizador">Tiempo estimado</span>
+                <span class="valor-temporizador" id="valor-tiempo">--</span>
+                <span class="unidad-temporizador">min</span>
+            </div>
+
+            <div class="zona-botones-actividad">
+                <form th:action="@{/transicion}" method="post">
+                    <input type="hidden" name="actividadId" th:value="${actividadId}">
+                    <button type="submit" class="boton-hecho">
+                        <span aria-hidden="true">✅</span> <span>Hecho</span>
+                    </button>
+                </form>
+                <a th:href="@{/horario/{fecha}(fecha=${fecha})}" class="boton-siguiente-actividad">
+                    <span aria-hidden="true">➡️</span> <span>Siguiente</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <th:block th:insert="~{fragments :: pie}"></th:block>
+
+    <script th:inline="javascript">
+        const duracion = /*[[${duracionEstimadaMin}]]*/ null;
+        if (duracion) {
+            document.getElementById('valor-tiempo').textContent = duracion;
+        }
+    </script>
+</body>
+</html>

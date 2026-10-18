@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <th:block th:insert="~{fragments :: head-comun}"></th:block>
+    <title th:text="'Actividad - Panel docente'">Actividad - Panel docente</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments :: cabecera(actividad != null and actividad.id != null ? 'Editar actividad' : 'Nueva actividad', '/docente/horario', true)}"></th:block>
+
+    <main class="contenido-docente">
+        <section class="panel-formulario">
+            <h1 class="titulo-panel" th:text="${actividad != null and actividad.id != null ? 'Editar actividad' : 'Nueva actividad'}">Nueva actividad</h1>
+
+            <form th:action="@{/docente/actividad}" method="post" th:object="${actividad}">
+                <input type="hidden" name="id" th:value="${actividad.id ?: ''}"/>
+
+                <div class="campo-formulario">
+                    <label for="jornadaId">Jornada</label>
+                    <input type="text" id="jornadaId" class="input-formulario"
+                           th:value="${jornada != null ? 'Jornada del ' + #temporals.format(jornada.fecha, 'dd/MM/yyyy') : ''}"
+                           readonly />
+                    <input type="hidden" name="jornada.id" th:value="${jornada != null ? jornada.id : ''}"/>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="nombre">Nombre de la actividad</label>
+                    <input type="text" id="nombre" name="nombre" class="input-formulario"
+                           th:value="${actividad.nombre ?: ''}" required maxlength="100"/>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="pictogramaClave">Pictograma</label>
+                    <select id="pictogramaClave" name="pictogramaClave" class="select-formulario" required>
+                        <option th:each="pg : ${pictogramas}"
+                                th:value="${pg.clave}"
+                                th:text="${pg.descripcion}"
+                                th:selected="${actividad.pictogramaClave != null and actividad.pictogramaClave eq pg.clave}">
+                            Pictograma
+                        </option>
+                    </select>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="orden">Orden en la secuencia</label>
+                    <input type="number" id="orden" name="orden" class="input-formulario"
+                           th:value="${actividad.orden ?: ''}" min="1" required/>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="duracionEstimadaMin">Duración estimada (minutos)</label>
+                    <input type="number" id="duracionEstimadaMin" name="duracionEstimadaMin"
+                           class="input-formulario" th:value="${actividad.duracionEstimadaMin ?: ''}" min="1" required/>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="avisoCambioMin">Aviso de cambio con antelación (minutos)</label>
+                    <input type="number" id="avisoCambioMin" name="avisoCambioMin"
+                           class="input-formulario" th:value="${actividad.avisoCambioMin ?: ''}" min="0" required/>
+                </div>
+
+                <div class="zona-botones-formulario">
+                    <button type="submit" class="boton-guardar-docente">
+                        <span aria-hidden="true">💾</span> <span th:text="${actividad != null and actividad.id != null ? 'Guardar cambios' : 'Guardar actividad'}">Guardar</span>
+                    </button>
+                    <a th:href="@{/docente/horario}" class="boton-cancelar-docente">Cancelar</a>
+                </div>
+            </form>
+
+            <div th:if="${error != null}" class="alerta-error" th:text="${error}">Error</div>
+        </section>
+    </main>
+
+    <th:block th:insert="~{fragments :: pie}"></th:block>
+</body>
+</html>

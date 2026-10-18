@@ -1,0 +1,1496 @@
+/* =========================================
+   Asistente de Anticipación Visual - Sofía
+   Paleta aprobada (WCAG 2.2 AA)
+   ========================================= */
+
+/* Variables de color */
+:root {
+  --fondo: #EAF6FF;
+  --fondo-secundario: #CFF0EA;
+  --fondo-componente: #BFE3FA;
+  --borde: #88C9C4;
+  --boton: #3E8FD6;
+  --boton-hover: #1E5A9C;
+  --boton-exito: #3E9B94;
+  --boton-exito-hover: #20666B;
+  --texto: #1E5A9C;
+  --texto-soporte: #20666B;
+  --texto-secundario: #7FC4F2;
+  --texto-sobre-oscuro: #0C3B45;
+  --blanco: #FFFFFF;
+}
+
+/* Reset y base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  /* permite escalado por el usuario */
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Enlaces y botones base */
+a {
+  color: var(--boton);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   Cabecera
+   ========================================= */
+.cabecera {
+  background-color: var(--fondo-secundario);
+  border-bottom: 3px solid var(--borde);
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.contenedor-cabecera,
+.contenedor-cabecera-docente {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+/* Toggle between Docente and Sofia views */
+.toggle-vistas {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.boton-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.boton-toggle-docente {
+  background-color: var(--fondo-componente);
+  color: var(--texto-sobre-oscuro);
+  border: 2px solid var(--borde);
+}
+
+.boton-toggle-docente:hover {
+  background-color: var(--borde);
+  color: var(--blanco);
+}
+
+.boton-toggle-sofia {
+  background-color: var(--boton);
+  color: var(--blanco);
+  border: 2px solid var(--boton);
+}
+
+.boton-toggle-sofia:hover {
+  background-color: var(--boton-hover);
+  border-color: var(--boton-hover);
+}
+
+
+.logo,
+.logo-docente {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--texto);
+}
+
+.icono-mascota {
+  font-size: 2rem;
+}
+
+.texto-logo {
+  color: var(--texto);
+}
+
+.fecha-hoy {
+  font-size: 1rem;
+  color: var(--texto-soporte);
+}
+
+.navegacion .boton-secundario,
+.boton-secundario {
+  background-color: var(--fondo-componente);
+  color: var(--texto-sobre-oscuro);
+  border: 2px solid var(--borde);
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.boton-secundario:hover {
+  background-color: #d3e9f7;
+}
+
+/* =========================================
+   Botones generales (objetivo táctil ≥ 60-80 px para Sofía)
+   ========================================= */
+.boton-principal,
+.boton-principal-docente,
+.boton-principal-aviso,
+.boton-principal-error,
+.boton-siguiente,
+.boton-siguiente-actividad,
+.boton-hecho,
+.boton-cambio,
+.boton-guardar-docente,
+.boton-volver-docente {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 72px;
+  padding: 0 1.5rem;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.boton-principal,
+.boton-principal-docente,
+.boton-principal-aviso,
+.boton-principal-error,
+.boton-siguiente,
+.boton-siguiente-actividad,
+.boton-guardar-docente,
+.boton-volver-docente {
+  background-color: var(--boton);
+  color: var(--blanco);
+}
+
+.boton-principal:hover,
+.boton-principal-docente:hover,
+.boton-principal-aviso:hover,
+.boton-principal-error:hover,
+.boton-siguiente:hover,
+.boton-siguiente-actividad:hover,
+.boton-guardar-docente:hover,
+.boton-volver-docente:hover {
+  background-color: var(--boton-hover);
+}
+
+.boton-hecho {
+  background-color: var(--boton-exito);
+  color: var(--blanco);
+  min-height: 80px;
+  font-size: 1.4rem;
+}
+
+.boton-hecho:hover {
+  background-color: var(--boton-exito-hover);
+}
+
+.boton-cambio {
+  background-color: var(--fondo-componente);
+  color: var(--texto-sobre-oscuro);
+  border: 2px solid var(--borde);
+}
+
+.boton-cambio:hover {
+  background-color: #d3e9f7;
+}
+
+.boton-cancelar-docente {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: var(--texto-soporte);
+  border: 2px solid var(--borde);
+  min-height: 56px;
+  font-size: 1rem;
+  padding: 0 1rem;
+}
+
+.boton-cancelar-docente:hover {
+  background-color: #f0f0f0;
+}
+
+.boton-editar-docente {
+  background-color: var(--boton);
+  color: var(--blanco);
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.boton-editar-docente:hover {
+  background-color: var(--boton-hover);
+}
+
+/* =========================================
+   Contenido principal
+   ========================================= */
+.contenido-principal,
+.contenido-secuencia,
+.contenido-actividad,
+.contenido-aviso,
+.contenido-docente,
+.contenido-error {
+  max-width: 1024px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
+
+.contenido-secuencia,
+.contenido-actividad,
+.contenido-aviso,
+.contenido-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* =========================================
+   Vista Sofía - Secuencia
+   ========================================= */
+.tarjeta-secuencia {
+  background-color: var(--blanco);
+  border: 3px solid var(--borde);
+  border-radius: 24px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(30, 90, 156, 0.1);
+  max-width: 768px;
+  width: 100%;
+}
+
+.titulo-secuencia {
+  font-size: 1.75rem;
+  color: var(--texto);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.lista-secuencia {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item-secuencia {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--fondo-componente);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.numero-paso {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background-color: var(--boton);
+  color: var(--blanco);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.contenido-paso {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pictograma-paso {
+  width: 96px;
+  height: 96px;
+  border-radius: 12px;
+  object-fit: contain;
+  background-color: var(--fondo-secundario);
+}
+
+.texto-paso {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--texto);
+}
+
+.detalle-paso {
+  font-size: 1rem;
+  color: var(--texto-soporte);
+}
+
+.boton-siguiente {
+  flex-shrink: 0;
+  width: auto;
+  min-width: 140px;
+  min-height: 56px;
+  font-size: 1rem;
+  padding: 0 1rem;
+}
+
+/* =========================================
+   Vista Sofía - Actividad actual
+   ========================================= */
+.tarjeta-actividad-central {
+  background-color: var(--blanco);
+  border: 3px solid var(--borde);
+  border-radius: 32px;
+  padding: 2rem;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(30, 90, 156, 0.1);
+}
+
+.titulo-actividad {
+  font-size: 1.5rem;
+  color: var(--texto);
+  margin-bottom: 1.5rem;
+}
+
+.contenedor-pictograma-grande {
+  margin: 1.5rem auto;
+}
+
+.pictograma-grande {
+  width: 200px;
+  height: 200px;
+  border-radius: 24px;
+  object-fit: contain;
+  background-color: var(--fondo-secundario);
+}
+
+.pictograma-placeholder {
+  font-size: 8rem;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: var(--fondo-secundario);
+  border-radius: 24px;
+}
+
+.nombre-actividad-grande {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 1.5rem;
+}
+
+.temporizador-visual {
+  background-color: var(--fondo-secundario);
+  border: 2px solid var(--borde);
+  border-radius: 16px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.etiqueta-temporizador {
+  font-size: 1rem;
+  color: var(--texto-soporte);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.valor-temporizador {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.unidad-temporizador {
+  font-size: 1rem;
+  color: var(--texto-soporte);
+}
+
+.zona-botones-actividad {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.boton-hecho {
+  min-height: 88px;
+  font-size: 1.5rem;
+}
+
+.boton-siguiente-actividad {
+  min-height: 72px;
+  font-size: 1.25rem;
+}
+
+/* =========================================
+   Vista Sofía - Aviso de cambio
+   ========================================= */
+.tarjeta-aviso {
+  background-color: var(--blanco);
+  border: 4px solid var(--borde);
+  border-radius: 32px;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(30, 90, 156, 0.15);
+}
+
+.icono-alerta {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.titulo-aviso {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 1rem;
+}
+
+.mensaje-aviso {
+  font-size: 1.25rem;
+  color: var(--texto-soporte);
+  margin-bottom: 1.5rem;
+}
+
+.pictograma-aviso {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+.nombre-siguiente {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--texto);
+  margin-bottom: 2rem;
+}
+
+.zona-botones-aviso {
+  display: flex;
+  justify-content: center;
+}
+
+.boton-principal-aviso {
+  min-width: 200px;
+  font-size: 1.25rem;
+}
+
+/* =========================================
+   Vista docente - Panel horario
+   ========================================= */
+.panel-horario,
+.panel-formulario,
+.panel-previa {
+  background-color: var(--blanco);
+  border: 2px solid var(--borde);
+  border-radius: 20px;
+  padding: 1.5rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.titulo-panel {
+  font-size: 1.5rem;
+  color: var(--texto);
+  margin-bottom: 1.5rem;
+}
+
+.tabla-horario {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.tabla-horario th,
+.tabla-horario td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--fondo-componente);
+}
+
+.tabla-horario th {
+  background-color: var(--fondo-secundario);
+  color: var(--texto-sobre-oscuro);
+  font-weight: 600;
+}
+
+.pictograma-tabla {
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.acciones-tabla {
+  white-space: nowrap;
+}
+
+.estado-vacio-docente,
+.estado-vacio {
+  background-color: var(--fondo-secundario);
+  border-radius: 16px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.mensaje-vacio {
+  font-size: 1.1rem;
+  color: var(--texto-soporte);
+}
+
+.zona-accion-docente,
+.zona-accion {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.enlace-previa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: var(--texto-soporte);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.enlace-previa:hover {
+  color: var(--texto);
+}
+
+/* =========================================
+   Vista docente - Formulario
+   ========================================= */
+.campo-formulario {
+  margin-bottom: 1.25rem;
+}
+
+.campo-formulario label {
+  display: block;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--texto);
+  margin-bottom: 0.5rem;
+}
+
+.input-formulario,
+.select-formulario {
+  width: 100%;
+  min-height: 52px;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--borde);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--texto);
+  background-color: var(--blanco);
+}
+
+.input-formulario:focus,
+.select-formulario:focus {
+  outline: none;
+  border-color: var(--boton);
+}
+
+.zona-botones-formulario {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.boton-guardar-docente {
+  flex: 1;
+  min-height: 56px;
+  font-size: 1rem;
+}
+
+/* =========================================
+   Vista docente - Previa
+   ========================================= */
+.secuencia-previa {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item-previa {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--fondo-componente);
+  border-radius: 16px;
+  padding: 1rem;
+}
+
+.numero-previa {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background-color: var(--boton);
+  color: var(--blanco);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.pictograma-previa {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: contain;
+  background-color: var(--fondo-secundario);
+}
+
+.nombre-previa {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--texto);
+}
+
+.detalle-previa {
+  font-size: 0.95rem;
+  color: var(--texto-soporte);
+}
+
+.boton-volver-docente {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  min-height: 56px;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+  background-color: var(--boton);
+  color: var(--blanco);
+  border-radius: 12px;
+}
+
+.boton-volver-docente:hover {
+  background-color: var(--boton-hover);
+}
+
+/* =========================================
+   Error
+   ========================================= */
+.contenido-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.tarjeta-error {
+  background-color: var(--blanco);
+  border: 3px solid var(--borde);
+  border-radius: 24px;
+  padding: 2.5rem;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+.icono-error {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.titulo-error {
+  font-size: 1.75rem;
+  color: var(--texto);
+  margin-bottom: 1rem;
+}
+
+.mensaje-error {
+  font-size: 1.1rem;
+  color: var(--texto-soporte);
+  margin-bottom: 1.5rem;
+}
+
+.codigo-error {
+  font-size: 1rem;
+  color: var(--texto-secundario);
+  margin-bottom: 1.5rem;
+}
+
+.boton-principal-error {
+  min-width: 200px;
+  font-size: 1.25rem;
+}
+
+/* =========================================
+   Pie de página
+   ========================================= */
+.pie-pagina {
+  background-color: var(--fondo-secundario);
+  border-top: 2px solid var(--borde);
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.contenedor-pie {
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.texto-pequeno {
+  font-size: 0.85rem;
+  color: var(--texto-soporte);
+}
+
+/* =========================================
+   Aviso flotante (JS)
+   ========================================= */
+.aviso-flotante {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--texto);
+  color: var(--blanco);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  z-index: 1000;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(12, 59, 69, 0.3);
+}
+
+/* =========================================
+   Accesibilidad
+   ========================================= */
+:focus-visible {
+  outline: 3px solid var(--boton);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* =========================================
+   Botón Ir Arriba
+   ========================================= */
+.boton-ir-arriba {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--boton);
+  color: var(--blanco);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+  transform: translateY(20px);
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.bi-arrow-up-circle-fill {
+  font-size: 1.3rem;
+}
+
+.boton-ir-arriba.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.boton-ir-arriba:hover {
+  background-color: var(--boton-hover);
+}
+
+.boton-ir-arriba:focus {
+  outline: 2px solid var(--boton-hover);
+  outline-offset: 2px;
+}
+
+.texto-boton-arriba {
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* =========================================
+   Accesibilidad
+   ========================================= */
+.botones-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.accesibilidad-cabecera {
+  display: flex;
+  align-items: center;
+}
+
+.boton-accesibilidad {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--fondo-componente);
+  color: var(--texto-sobre-oscuro);
+  border: 2px solid var(--borde);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.boton-accesibilidad:hover {
+  background-color: var(--borde);
+  color: var(--blanco);
+}
+
+.texto-boton-accesibilidad {
+  white-space: nowrap;
+}
+
+/* Panel de accesibilidad */
+.panel-accesibilidad {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  width: 280px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: var(--fondo-secundario);
+  border: 2px solid var(--borde);
+  border-radius: 12px;
+  padding: 1.5rem;
+  z-index: 2000;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.panel-accesibilidad.visible {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.panel-accesibilidad h3 {
+  font-size: 1.1rem;
+  color: var(--texto);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--borde);
+  text-align: center;
+}
+
+.opcion-destino-accesibilidad {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: var(--fondo);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.opcion-destino-accesibilidad legend {
+  padding: 0 0.25rem;
+  font-weight: 600;
+}
+
+.opcion-destino-accesibilidad label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.45rem;
+  cursor: pointer;
+}
+
+.opcion-destino-accesibilidad input {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+}
+
+.opcion-accesibilidad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.boton-opcion-accesibilidad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background-color: var(--fondo);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.boton-opcion-accesibilidad:hover {
+  background-color: var(--fondo-componente);
+  transform: scale(1.05);
+}
+
+.boton-opcion-accesibilidad:active {
+  transform: scale(0.95);
+}
+
+.boton-opcion-accesibilidad.active {
+  background-color: var(--boton);
+  color: var(--blanco);
+  border-color: var(--boton);
+}
+
+.boton-aceptar-accesibilidad {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--boton);
+  color: var(--blanco);
+  border: 2px solid var(--boton);
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.boton-aceptar-accesibilidad:hover {
+  background-color: var(--boton-hover);
+  border-color: var(--boton-hover);
+}
+
+/* Clases de accesibilidad */
+html.tamano-texto-grande {
+  font-size: 120%;
+}
+
+html.tamano-texto-muy-grande {
+  font-size: 150%;
+}
+
+body.contraste-alto {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.contraste-alto .cabecera {
+  background-color: #000000;
+  border-bottom-color: #ffffff;
+}
+
+.contraste-alto .boton-toggle-docente,
+.contraste-alto .boton-toggle-sofia {
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+body.fuente-dislexia {
+  font-family: 'OpenDyslexic', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body.cursor-grande {
+  cursor: url('/img/cursor-grande-64.png') 1 1, auto;
+}
+
+body.cursor-grande *,
+body.cursor-grande button,
+body.cursor-grande a,
+body.cursor-grande input,
+body.cursor-grande label {
+  cursor: url('/img/cursor-grande-64.png') 1 1, auto !important;
+}
+
+.enlaces-destacados a {
+  text-decoration: underline;
+  background-color: yellow;
+  color: red;
+}
+
+body.guia-lectura-on {
+  background-image: repeating-linear-gradient(to bottom,
+      transparent,
+      transparent 2rem,
+      rgba(255, 255, 0, 0.3) 2.1rem,
+      rgba(255, 255, 0, 0.3) 2.2rem);
+}
+
+.animaciones-off * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* =========================================
+   Diseño adaptable
+   ========================================= */
+html {
+  scroll-padding-top: 6rem;
+}
+
+img {
+  max-width: 100%;
+}
+
+.contenedor-cabecera > *,
+.botones-cabecera > *,
+.item-secuencia > *,
+.item-previa > * {
+  min-width: 0;
+}
+
+/* Smartphone: 320–640 px. Una columna y objetivos táctiles amplios. */
+@media (max-width: 640px) {
+  .cabecera {
+    padding: 0.75rem 1rem;
+  }
+
+  .contenedor-cabecera {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .logo {
+    justify-content: center;
+    font-size: clamp(1.25rem, 6vw, 1.5rem);
+  }
+
+  .botones-cabecera,
+  .toggle-vistas {
+    width: 100%;
+  }
+
+  .botones-cabecera {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .toggle-vistas,
+  .menu-accesibilidad {
+    flex: 1 1 100%;
+  }
+
+  .boton-toggle,
+  .boton-accesibilidad {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+
+  .contenido-principal,
+  .contenido-secuencia,
+  .contenido-actividad,
+  .contenido-aviso,
+  .contenido-docente,
+  .contenido-error {
+    margin: 0.75rem auto;
+    padding: 0 0.75rem;
+  }
+
+  .tarjeta-secuencia,
+  .tarjeta-actividad-central,
+  .tarjeta-aviso,
+  .panel-horario,
+  .panel-formulario,
+  .panel-previa,
+  .tarjeta-error {
+    border-radius: 16px;
+    padding: 1rem;
+  }
+
+  .titulo-secuencia,
+  .titulo-panel {
+    font-size: clamp(1.35rem, 7vw, 1.6rem);
+    margin-bottom: 1rem;
+  }
+
+  .item-secuencia,
+  .item-previa {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .numero-paso,
+  .numero-previa,
+  .pictograma-paso,
+  .pictograma-previa {
+    align-self: center;
+  }
+
+  .contenido-paso {
+    align-items: center;
+  }
+
+  .pictograma-paso {
+    width: min(38vw, 120px);
+    height: min(38vw, 120px);
+  }
+
+  .pictograma-grande,
+  .pictograma-placeholder {
+    width: min(58vw, 200px);
+    height: min(58vw, 200px);
+  }
+
+  .nombre-actividad-grande {
+    font-size: clamp(1.5rem, 8vw, 2rem);
+  }
+
+  .boton-siguiente,
+  .boton-principal-aviso,
+  .boton-principal-error {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .boton-hecho,
+  .boton-siguiente-actividad,
+  .boton-principal,
+  .boton-principal-docente,
+  .boton-principal-aviso,
+  .boton-principal-error,
+  .boton-siguiente,
+  .boton-guardar-docente,
+  .boton-volver-docente,
+  .boton-cancelar-docente {
+    min-height: 56px;
+    font-size: 1.1rem;
+  }
+
+  .zona-botones-formulario {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .tabla-horario,
+  .tabla-horario tbody,
+  .tabla-horario tr,
+  .tabla-horario td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabla-horario thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .tabla-horario tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .tabla-horario td {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+
+  .tabla-horario td::before {
+    flex: 0 1 48%;
+    color: var(--texto-soporte);
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .tabla-horario td:nth-child(1)::before { content: "Orden"; }
+  .tabla-horario td:nth-child(2)::before { content: "Actividad"; }
+  .tabla-horario td:nth-child(3)::before { content: "Pictograma"; }
+  .tabla-horario td:nth-child(4)::before { content: "Duración (min)"; }
+  .tabla-horario td:nth-child(5)::before { content: "Aviso de cambio (min)"; }
+  .tabla-horario td:nth-child(6)::before { content: "Acciones"; }
+
+  .acciones-tabla {
+    white-space: normal;
+  }
+
+  .boton-editar-docente {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .panel-accesibilidad {
+    right: 1rem;
+    width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    padding: 1rem;
+  }
+
+  .opcion-accesibilidad {
+    grid-template-columns: 1fr;
+  }
+
+  .boton-opcion-accesibilidad {
+    min-height: 48px;
+  }
+
+  .boton-ir-arriba {
+    right: 1rem;
+    bottom: 1rem;
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0.5rem;
+  }
+}
+
+/* Tablet / iPad: 641–1024 px. Prioriza uso táctil y ambas orientaciones. */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .cabecera {
+    padding-inline: 1.25rem;
+  }
+
+  .contenedor-cabecera,
+  .contenido-principal,
+  .contenido-secuencia,
+  .contenido-actividad,
+  .contenido-aviso,
+  .contenido-docente,
+  .contenido-error,
+  .contenedor-pie {
+    max-width: 960px;
+  }
+
+  .contenido-principal,
+  .contenido-secuencia,
+  .contenido-actividad,
+  .contenido-aviso,
+  .contenido-docente,
+  .contenido-error {
+    padding-inline: 1.5rem;
+  }
+
+  .pictograma-paso {
+    width: 112px;
+    height: 112px;
+  }
+
+  .pictograma-grande,
+  .pictograma-placeholder {
+    width: 180px;
+    height: 180px;
+  }
+
+  .boton-siguiente,
+  .boton-editar-docente,
+  .boton-toggle,
+  .boton-accesibilidad {
+    min-height: 48px;
+  }
+
+  .tabla-horario {
+    table-layout: fixed;
+  }
+
+  .tabla-horario th,
+  .tabla-horario td {
+    padding: 0.5rem;
+    overflow-wrap: anywhere;
+  }
+
+  .acciones-tabla {
+    white-space: normal;
+  }
+
+  .panel-accesibilidad {
+    right: 1.5rem;
+  }
+}
+
+/* Laptop: 1025–1366 px. Contenido centrado, sin estirarlo en exceso. */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .contenedor-cabecera,
+  .contenido-principal,
+  .contenido-secuencia,
+  .contenido-actividad,
+  .contenido-aviso,
+  .contenido-docente,
+  .contenido-error,
+  .contenedor-pie {
+    max-width: 1120px;
+  }
+
+  .panel-horario,
+  .panel-formulario,
+  .panel-previa {
+    max-width: 1000px;
+    margin-inline: auto;
+  }
+}
+
+/* Escritorio y monitores: desde 1367 px. */
+@media (min-width: 1367px) {
+  .contenedor-cabecera,
+  .contenido-principal,
+  .contenido-secuencia,
+  .contenido-actividad,
+  .contenido-aviso,
+  .contenido-docente,
+  .contenido-error,
+  .contenedor-pie {
+    max-width: 1240px;
+  }
+
+  .panel-horario,
+  .panel-formulario,
+  .panel-previa {
+    max-width: 1100px;
+    margin-inline: auto;
+  }
+
+  .tarjeta-secuencia {
+    max-width: 880px;
+  }
+}
+
+/* Pantalla / TV: desde 1920 px. Sobrescribe el modo escritorio. */
+@media (min-width: 1920px) {
+  html {
+    font-size: clamp(112.5%, 1vw, 150%);
+  }
+
+  html.tamano-texto-grande {
+    font-size: clamp(135%, 1.2vw, 180%);
+  }
+
+  html.tamano-texto-muy-grande {
+    font-size: clamp(168.75%, 1.5vw, 225%);
+  }
+
+  .contenedor-cabecera,
+  .contenido-principal,
+  .contenido-secuencia,
+  .contenido-actividad,
+  .contenido-aviso,
+  .contenido-docente,
+  .contenido-error,
+  .contenedor-pie {
+    max-width: 1680px;
+  }
+
+  .tarjeta-secuencia {
+    max-width: 1120px;
+    padding: 2rem;
+  }
+
+  .panel-horario,
+  .panel-formulario,
+  .panel-previa {
+    max-width: 1440px;
+    padding: 2rem;
+  }
+
+  .pictograma-paso {
+    width: 144px;
+    height: 144px;
+  }
+
+  .pictograma-grande,
+  .pictograma-placeholder {
+    width: 280px;
+    height: 280px;
+  }
+
+  .pictograma-previa {
+    width: 112px;
+    height: 112px;
+  }
+
+  .boton-ir-arriba {
+    right: 3rem;
+    bottom: 3rem;
+  }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<th:block th:fragment="head-comun">
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link th:rel="stylesheet" th:href="@{/css/styles.css}"/>
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/opendyslexic"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </th:block>
+</head>
+<body>
+    <th:block th:fragment="cabecera(titulo, rutaVolver, esDocente)">
+        <header class="cabecera">
+            <div class="contenedor-cabecera">
+                <a th:href="${rutaVolver}" class="logo">
+                    <span class="icono-mascota">🐬</span>
+                    <span class="texto-logo" th:text="${titulo} ?: 'Sofía'">Sofía</span>
+                </a>
+                <div class="botones-cabecera">
+                    <div class="toggle-vistas">
+                        <a th:if="${esDocente}" th:href="@{/}" class="boton-toggle boton-toggle-sofia">Sofía</a>
+                        <a th:if="${!esDocente}" th:href="@{/docente/horario}" class="boton-toggle boton-toggle-docente">Docente</a>
+                    </div>
+                    <div th:if="${esDocente}" class="menu-accesibilidad">
+                        <button id="btn-accesibilidad" class="boton-accesibilidad" type="button"
+                                aria-label="Opciones de accesibilidad" aria-controls="panel-accesibilidad"
+                                aria-expanded="false">
+                            <span>♿</span>
+                            <span class="texto-boton-accesibilidad">Opciones</span>
+                        </button>
+                        <div id="panel-accesibilidad" class="panel-accesibilidad" role="region"
+                             aria-label="Opciones de accesibilidad">
+                            <h3>Opciones de Accesibilidad</h3>
+                            <fieldset class="opcion-destino-accesibilidad">
+                                <legend>Aplicar opciones a</legend>
+                                <label>
+                                    <input type="radio" name="destino-accesibilidad" value="docente"/>
+                                    Selección normal (solo para el docente)
+                                </label>
+                                <label>
+                                    <input type="radio" name="destino-accesibilidad" value="ambos"/>
+                                    Aplicar también para Sofía
+                                </label>
+                                <label>
+                                    <input type="radio" name="destino-accesibilidad" value="sofia"/>
+                                    Aplicar solo para Sofía
+                                </label>
+                            </fieldset>
+                            <div class="opcion-accesibilidad">
+                                <button data-accion="tamano-texto-normal" class="boton-opcion-accesibilidad">
+                                    <span>🔤</span> <span>Tamaño normal</span>
+                                </button>
+                                <button data-accion="tamano-texto-grande" class="boton-opcion-accesibilidad">
+                                    <span>🔤🔤</span> <span>Texto grande</span>
+                                </button>
+                                <button data-accion="tamano-texto-muy-grande" class="boton-opcion-accesibilidad">
+                                    <span>🔤🔤🔤</span> <span>Texto muy grande</span>
+                                </button>
+                            </div>
+                            <div class="opcion-accesibilidad">
+                                <button data-accion="contraste-normal" class="boton-opcion-accesibilidad">
+                                    <span>🎨</span> <span>Contraste normal</span>
+                                </button>
+                                <button data-accion="contraste-alto" class="boton-opcion-accesibilidad">
+                                    <span>🖤</span> <span>Alto contraste</span>
+                                </button>
+                            </div>
+                            <div class="opcion-accesibilidad">
+                                <button data-accion="fuente-normal" class="boton-opcion-accesibilidad">
+                                    <span>🔠</span> <span>Fuente estándar</span>
+                                </button>
+                                <button data-accion="fuente-dislexia" class="boton-opcion-accesibilidad">
+                                    <span>📖</span> <span>Fuente dislexia</span>
+                                </button>
+                            </div>
+                            <div class="opcion-accesibilidad">
+                                <button data-accion="cursor-normal" class="boton-opcion-accesibilidad">
+                                    <span>🖱️</span> <span>Cursor normal</span>
+                                </button>
+                                <button data-accion="cursor-grande" class="boton-opcion-accesibilidad">
+                                    <span>🖱️🖱️</span> <span>Cursor grande</span>
+                                </button>
+                            </div>
+                            <div class="opcion-accesibilidad">
+                                <button data-accion="enlaces-normal" class="boton-opcion-accesibilidad">
+                                    <span>🔗</span> <span>Enlaces normales</span>
+                                </button>
+                                <button data-accion="enlaces-destacados" class="boton-opcion-accesibilidad">
+                                    <span>🔗✨</span> <span>Resaltar enlaces</span>
+                                </button>
+                            </div>
+                            <div class="opcion-accesibilidad">
+                                <button data-accion="guia-lectura-off" class="boton-opcion-accesibilidad">
+                                    <span>📄</span> <span>Sin guía</span>
+                                </button>
+                                <button data-accion="guia-lectura-on" class="boton-opcion-accesibilidad">
+                                    <span>📄✏️</span> <span>Guía visual</span>
+                                </button>
+                            </div>
+                            <div class="opcion-accesibilidad">
+                                <button data-accion="animaciones-on" class="boton-opcion-accesibilidad">
+                                    <span>🎬</span> <span>Animaciones activas</span>
+                                </button>
+                                <button data-accion="animaciones-off" class="boton-opcion-accesibilidad">
+                                    <span>🛑</span> <span>Detener animaciones</span>
+                                </button>
+                            </div>
+                            <button id="btn-aceptar-accesibilidad" class="boton-aceptar-accesibilidad" type="button">
+                                Aceptar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </th:block>
+
+<th:block th:fragment="pie">
+        <footer class="pie-pagina">
+            <div class="contenedor-pie">
+                <p class="texto-pequeno">Asistente de Anticipación Visual — Prototipo funcional</p>
+                <p class="texto-pequeno">Sin datos de diagnóstico. Uso exclusivo en el aula.</p>
+            </div>
+        </footer>
+        <button id="btn-ir-arriba" class="boton-ir-arriba" aria-label="Ir arriba">
+            <i class="bi bi-arrow-up-circle-fill" aria-hidden="true"></i>
+            <span class="texto-boton-arriba">Ir arriba</span>
+        </button>
+        <script th:src="@{/js/app.js}"></script>
+    </th:block>
+</body>
+</html>

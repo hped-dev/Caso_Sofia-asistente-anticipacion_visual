@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <th:block th:insert="~{fragments :: head-comun}"></th:block>
+    <title th:text="'Aviso de cambio - Sofía'">Aviso de cambio</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments :: cabecera(~{::#titulo-cabecera}, '/', false)}">
+        <span id="titulo-cabecera" th:text="'Aviso de cambio'">Aviso de cambio</span>
+    </th:block>
+
+    <main class="contenido-aviso">
+        <section class="tarjeta-aviso">
+            <div class="icono-alerta">⚠️</div>
+
+            <h1 class="titulo-aviso" th:text="'¡Pronto cambiaremos de actividad!'">Cambio pronto</h1>
+
+            <p class="mensaje-aviso" th:text="'En ' + ${minutos} + ' minutos:'">En 5 minutos:</p>
+
+            <div class="pictograma-siguiente" th:if="${actividadSiguiente != null}">
+                <img th:src="${actividadSiguiente.urlImagen}" th:alt="${actividadSiguiente.nombre}"
+                     class="pictograma-aviso" width="100" height="100"/>
+                <div class="nombre-siguiente" th:text="${actividadSiguiente.nombre}">Siguiente actividad</div>
+            </div>
+
+            <div class="zona-botones-aviso">
+                <a th:href="@{/}" class="boton-principal-aviso">
+                    <span aria-hidden="true">✅</span> <span>Entendido</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <th:block th:insert="~{fragments :: pie}"></th:block>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <th:block th:insert="~{fragments :: head-comun}"></th:block>
+    <title th:text="${titulo} ?: 'Error'">Error</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments :: cabecera(titulo ?: 'Error', '/', false)}"></th:block>
+
+    <main class="contenido-error">
+        <section class="tarjeta-error">
+            <div class="icono-error">⚠️</div>
+            <h1 class="titulo-error" th:text="${titulo} ?: 'Error'">Error</h1>
+            <p class="mensaje-error" th:text="${mensaje} ?: 'Ha ocurrido un error inesperado.'">Error</p>
+            <div class="codigo-error" th:text="${codigo} ?: 500">500</div>
+            <a th:href="@{/}" class="boton-principal-error">
+                <span aria-hidden="true">🏠</span> <span>Volver al inicio</span>
+            </a>
+        </section>
+    </main>
+
+    <th:block th:insert="~{fragments :: pie}"></th:block>
+</body>
+</html>
