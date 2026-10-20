@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: asistente-anticipacion-visual
+    env: docker
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /

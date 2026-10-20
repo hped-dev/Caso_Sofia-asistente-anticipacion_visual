@@ -1,0 +1,11 @@
+services:
+  asistente:
+    build: .
+    image: asistente-anticipacion-visual:latest
+    container_name: asistente-sofia
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - TZ=America/Mexico_City
+    restart: unless-stopped
